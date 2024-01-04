@@ -14,9 +14,10 @@ kobus : https://www.kobus.co.kr/
 3. 로그인 회원가입 및 권한 설정 : 2023.11.27 ~ 2023.12.04  
 4. 핵심 기능구현 : 2023.11.29 ~ 2023.12.12  
 5. 병합 및 테스트 : 2023.12.11 ~ 2023.12.15  
-6. 세부 유효성 검사 및 버그 수정 : : 2023.12.18 ~ 2023.12.29  
-7. 디자인 : 2023.12.18 ~ 2023.12.29  
-8. 유지보수: 2024.1.2 ~ (ing)
+6. 디자인 : 2023.12.18 ~ 2023.12.29 
+7. 유효성 검사 및 디버깅 : 2023.12.18 ~ 2024.1.8
+8. 일반 사용자 피드백 취합: 2024.1.4 ~ 2024.1.5
+9. 유지보수: 2024.1.2 ~ (ing)
  
 ## 팀 구성
 **5인 팀 (반장(1), 조장(1), 부조장(1), 서기(1), 조원(1))**
@@ -38,8 +39,8 @@ kobus : https://www.kobus.co.kr/
 * DBMS: Oracle DB (11xe)
 * ORM: Mybatis
 
-## (필독) 실행 전 사전준비사항
-* sts 설치경로에 lombok.jar 라이브러리를 개별 설치하여 붙여줍니다.
+## (필독) IDE에서 실행할 시 사전준비사항
+* sts 설치경로에 lombok.jar 라이브러리를 개별 설치하여 붙여준 후에 busro 폴더를 workspace에 넣어 import합니다.
 * 지도기능 (KAKAO MAP API)를 사용하기 위해 개개인이 발급받은 키를 등록해주어야 합니다.
   (https://apis.map.kakao.com/web/guide/) 를 참고하시어 키를 발급받으시고 "main.jsp" 파일 내 아래 두개의 코드부분을 수정해주시면 됩니다.
   ```
@@ -48,6 +49,18 @@ kobus : https://www.kobus.co.kr/
   ```
 	var REST_API_KEY = '{여기에 개인이 발급한 KAKAO MAP API 키가 들어갑니다.}';
   ```
+* 개인 PC에 설치되어있는 오라클 DBMS(해당 프로젝트는 11xe 기준)를 사용하기 위해 "root-context.xml" 파일에서 다음과 같은 부분을 수정해주시면 됩니다.
+```
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:oracle:thin:@{이 부분을 개인 DBMS에 맞도록 수정해주세요}" />
+		<property name="username" value="{이 부분을 개인 DBMS에 맞도록 수정해주세요}" />
+		<property name="password" value="{이 부분을 개인 DBMS에 맞도록 수정해주세요}" />
+	</bean>
+```
+* DBMS 설정을 완료한 후, "busro.sql" 파일을 toad 혹은 sqlDeveloper와 같은 프로그램으로 실행하여 테이블 및 더미데이터를 작성합니다.
 * 공지사항에서 업로드한 파일이 저장될 장소를 마련하기 위해 C드라이브 밑에 "upload" 라는 이름의 폴더를 작성합니다.
 ## 주요기능
 ### 로그인/회원가입
@@ -62,7 +75,7 @@ kobus : https://www.kobus.co.kr/
 * 왕복/편도건의 좌석 예매
 
 ## 고려사항
-* 카드사와 연동하여 결제 서비스 구현
+* 카카오페이 및 아임포트와 같은 가상결제를 지원하는 API와 연동하여 결제 시스템 구축.
 * 클라우드 서버를 통하여 실제 웹 서비스 배포
-* 기존 spring 버전의 지원 종료로 인한 springboot로의 마이그레이션
+* 기존 spring mvc에서 springboot로의 마이그레이션
 * spring security 적용하여 보안 강화
