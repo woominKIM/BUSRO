@@ -1,0 +1,197 @@
+/*- - - - - - - - - - - - - - - - - 헤더영역 - - - - - - - - - - - - - -*/
+
+/* 폰트(Gugi, Roboto, NotoSansKR, LotteMartHappy) */
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&family=Roboto:wght@300&display=swap');
+@font-face {
+  font-family: 'LotteMartHappy';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff') format('woff');
+}
+
+/* 헤더 전체 */
+#headerWrap {
+	background-color:white;
+	display:flex;
+	width:100%;
+	min-width: 1080px;
+	height:100px;
+	align-items: center;
+}
+#header {
+	display: flex;
+	width:100%;
+	justify-content: center;
+}
+
+/* 로고 */
+#logo {
+	text-align: center;
+	width:20%;
+}
+#logo > a {
+	font-family: 'LotteMartHappy',sans-serif;
+	color: #050540;
+	/* color: #EF3340; 디자인회의 때 지정했던 색상 */
+	font-size: 60px;
+}
+
+#logo >a:hover {
+	font-weight: normal;
+}
+
+/* 메뉴바 */
+#gnb {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	width: 80%;
+}
+#gnb>ul {
+	display:flex;
+	width:100%;
+	align-items: center;
+}
+#gnb>ul>li {
+	width: 12.5%;
+}
+
+.navTop {
+	color: #050540;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+/* 메뉴바(드롭다운) */
+.dropdown {
+	position: relative;
+	display: block;
+}
+.dropdown-pointing {
+	display: none;
+	margin: 8px auto 0 auto;
+	width: 0;
+	height: 0;
+	border-bottom: 7px solid rgba(0,0,0,0.8);
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+}
+.dropdown-content {
+	display: none;
+	position: absolute;
+	width: 100%;
+	z-index: 1; /*다른 요소들보다 앞에 배치*/
+	font-weight: 400;
+	background-color: rgba(0,0,0,0.8);
+	border-radius: 10px;
+	
+}
+.dropdown-content > #navDrop:not(:last-child){
+	border-bottom: 1px solid #444;
+}
+#navDrop {
+	color: white;
+	font-weight: bold;	
+	display: inline-block;	
+	text-align: center;
+	white-space: nowrap;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.dropdown:hover .dropdown-content,
+.dropdown:hover .dropdown-pointing {
+	display: block;
+}
+
+#gnb>ul>li>a:hover{
+	padding-bottom: 5px;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+
+/* 로그인 공통 기능*/
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+ul li {
+	list-style: none;
+}
+/* input {
+	height: 50px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid;
+	border-radius: 0;
+	outline: none;	
+	width: 25%;
+	font-size: 2rem;
+	margin: 0 0 15px 0;	
+	padding: 0;
+	box-shadow: none;
+	box-sizing: content-box;
+	transition: all 0.3s;
+	text-align: center;	
+}
+input:focus {
+	border-bottom: 1px solid #26a69a;
+	box-shadow: 0 1px 0 0 #26a69a;	
+} */
+
+/* 사이드 영역 */
+#main-aside {
+	float: left;
+	width: 20%;	
+}
+.aside-list>ul>li {
+	float: left;
+	display: inline-block;
+	width: 200px;
+	/* border: 1px solid; */
+}
+.aside-list>ul>li>a {
+	font-size: 20px;
+	color: #050540;
+	width: 200px;
+	display: inline-block;
+	margin: 15px 0;
+	text-align: center;
+	white-space: nowrap;
+	font-weight: bold;
+}
+.aside-list>ul>li>a:hover {
+	color: #050540;
+}
+
+/* 컨텐츠 영역 */
+
+#content {
+	overflow: hidden;
+	width: 1080px;
+	margin: 0 auto;
+	padding-top: 100px;
+	height: auto;	
+}
+
+#main-section {
+	float: right;
+	width: 70%;
+	font-size: 2em;
+}
+.backBtn, .jujangBtn, #submit, #cancel {
+    background-color: #050540;
+    color: white;
+    border-radius: 8px;
+    border-width: 0;
+    padding: 6px 20px 9px 20px;
+    font-family: "roboto","Noto Sans KR",sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}

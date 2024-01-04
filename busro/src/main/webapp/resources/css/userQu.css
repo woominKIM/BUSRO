@@ -1,0 +1,264 @@
+@charset "EUC-KR";
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+th, td {
+	border-bottom: 1px solid #aaa;
+	padding: 4px;
+	text-align: center;
+}
+tbody td {
+	font-size: 14px;
+}
+
+/*공통 기능*/
+*{
+	margin: 0;
+	padding:0;
+}
+body{
+	width:100%;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+body,
+h1, h2, h3, h4, h5, h6, table,
+input, select, textarea, a, button {
+	font-family: "roboto","Noto Sans KR",sans-serif;
+    font-size: 16px;
+}
+button {
+	background-color: #050540;
+	color: white;
+	border-radius: 8px;
+	border-width: 0;
+	padding: 6px 20px 9px 20px;
+	cursor:pointer;
+}
+select {
+	border-left-width:0;
+	border-right-width:0;
+	border-top-width:0;
+}
+input[type="text"] {
+	appearance:none;
+	border-left-width:0;
+	border-right-width:0;
+	border-top-width:0;
+	border-bottom-width:1px;
+	background-color: white;
+}
+input[type="radio"] {
+	appearance:none;
+  	width: 14px;
+ 	height: 14px;
+  	border: 1px solid #050540;
+  	border-radius: 100%;
+  	margin-bottom: -2px;
+  	margin-right: 5px;
+}
+input[type='radio']:checked {
+  background-color: #050540;
+}
+ul, li {
+	list-style: none;
+}
+
+.star{
+ 	color: rgb(238, 106, 123);
+ 	
+ 	padding-right: 5px;
+ }
+
+#contentWrap{
+	width:1080px;
+	margin: 0 auto;
+}
+.tableWrap{
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+.choose{
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+.choose label {
+	padding-right: 5px;
+}
+
+select {
+	
+	border-left-width:0;
+	border-right-width:0;
+	border-top-width:0;
+}
+.who{
+	padding-bottom: 15px;
+}
+
+.who label{
+	padding-right: 30px;
+}
+
+
+.wonder label, span{
+	padding-right: 5px;
+}
+
+
+.wonder textarea{
+	resize: none;
+	width: 99%;
+	height: 250px;
+	border: none;
+	padding: 10px 0 0 8px;
+}
+
+.an_wrap textarea{
+	resize: none;
+	width: 99%;
+	height: 250px;
+	padding: 5px 0 0 7px;
+	margin: 12px 0 12px 0;
+}
+
+.quTitle{
+	padding: 20px;
+	text-align:center;
+	font-size: 20px !important;
+}
+
+.an_wrap {
+	border: 1px solid #050540;
+	border-radius: 6px;
+	margin-top : 28px; 
+	padding: 15px 15px 10px 15px;
+}
+
+.iq_wrap{
+	border: 1px solid #050540;
+	border-radius: 6px;
+	padding: 15px 15px 10px 15px;
+}
+
+.quWrap{
+	margin: 10px 0 22px 0;
+	
+}
+
+.adminDate {
+	padding-top: 6px;
+}
+
+.letsMove{
+	height: 40px;
+	width: 1080px;
+	margin-bottom: 12px;
+}
+
+.letsMove button{
+	float: right;
+}
+
+.memberInfo textarea{
+	resize: none;
+	width: 99%;
+	height: 250px;
+	margin-bottom: 10px;
+	padding: 10px 0 0 8px;
+}
+
+
+.toCh{
+	padding-bottom: 15px;
+}
+
+.quBtn{
+	padding: 20px;
+	text-align:center;
+}
+
+.quBtn button{
+	margin-left: 10px;
+}
+
+.quty{
+	border-left-width: 0;
+	border-right-width: 0;
+	border-top-width: 0;
+	border-bottom-width: 1px solid #050540;
+}
+
+
+.quty:focus {
+	
+	writing-mode: horizontal-tb !important;
+	border-bottom: 1px solid #26a69a;
+	
+}
+
+
+*:focus{
+	
+	outline: 0;
+}
+
+/* 페이징 */
+.paging_region{
+	text-align: center;
+	padding: 20px 0;
+}
+.pageInfo{
+	padding: 0 6px;
+}
+.pageInfo a{
+	font-size: 24px;
+}
+
+/* 삭제 모달창 꾸미기 */
+.deletemodal{
+	width: 380px;
+	height: 170px;
+	border: 0.3px solid #050540;
+	position: fixed;
+	top: 33%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 10px auto;
+	border-radius: 4px;
+}
+
+.delete-body{
+	text-align: center;
+	line-height: 147px;
+	position: relative;
+}
+
+.modal-body{
+	text-align: center;
+	line-height: 147px;
+	position: relative;
+}
+
+.modal-footer{
+	position: absolute;
+	top: 66%;
+	left: 29%;
+}
+
+.delete-modal-footer{
+	position: absolute;
+	top: 66%;
+	left: 29%;
+}
+
+.modalRemoveBtn{
+	margin-right: 10px;
+}

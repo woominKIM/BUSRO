@@ -1,0 +1,81 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding:0;
+}
+
+/* 화면 전체 렙 */
+.wrapper{
+	width: 100%;	
+}
+
+/* content 랩 */
+.wrap{	
+	margin: auto;
+}
+
+/* 페이지 로고 */
+.logo_wrap{
+	text-align: center;	
+	margin: 50px 0;	
+}
+.logo_wrap>span{
+	font-size : 40px;
+	font-weight: 900;
+}
+
+
+/* 로그인 area */
+.id_input_box, .pw_input_box{ 
+	/* border: 1px solid black; */
+	height: 20px;
+	padding: 10px 14px;	
+	display: block;
+	width: 50%;
+	margin: auto;
+	position: relative;
+}
+/* .id_input{ form-control 자리에 넣을지 확인
+	width:100%;
+	height:100%;
+	border:none;
+	font-size:28px;
+} */
+
+
+.pw_wrap{
+	margin-top: 40px;
+}
+
+.login_button_wrap{
+	margin-top: 15px;
+	text-align: center;
+}
+.login_button{
+	width: 10%;
+    height: 40px;
+    background-color: #050540;
+    border-radius: 8px;
+    font-weight: 900;
+    color: white;
+    margin : auto;
+    margin-top: 120px;
+    cursor: pointer;
+   
+}
+
+/* 로그인 실패시 경고글 */
+.login_warn{
+    margin-top: 30px;
+    text-align: center;
+    color : red;
+    left: 50%;
+    margin-left: -175px;
+    position: absolute;
+    margin-top: 80px;
+}
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}

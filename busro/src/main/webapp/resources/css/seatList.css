@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+/* 화면 전체 렙 */
+.wrapper{
+	width: 1080px;
+	height: 1300px;
+	margin: 0 auto;
+}
+
+.driverSeat{
+	font-size: 20px;
+}
+.headCount{
+	font-size: 20px;
+}
+.headCountText{
+	font-size: 20px;
+}
+
+/* content 랩 */
+.seatTitle{
+	padding: 40px;
+	text-align:center;
+	font-size: 20px !important;
+}
+section{
+	width:60%; 
+	float:left;
+}
+aside{
+	width:40%;
+	float:left;
+}
+
+
+/*좌석도*/
+section table{
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 20px;
+	border-spacing: 0;
+	margin: 10px auto;
+	text-align:center;
+}
+section th, section td {
+	padding: 6px;
+}
+.driverSeat{
+	border:1px solid #ccc;
+	border-radius: 10px;
+}
+.seatIcon{
+	width: 60px;
+	height: 60px;
+}
+.seatInfoTr{
+	font-size:16px;
+}
+.seatIconTr td{
+	border:1px solid #050540;
+	border-radius: 14px 14px 0 0;
+	border-bottom: 0;
+}
+.seatInfoTr td{
+	border:1px solid #050540;
+	border-radius: 0 0 14px 14px;
+	border-top: 0;
+	padding-top: 0;
+}
+.tdSpace{
+	width:0 !important;
+	border:none !important;
+}
+#corridor{
+	border:none;
+}
+
+
+/*사이드(인원선택창)*/
+.asideWrap{
+	display: inline-block;
+}
+aside table{
+	margin-top: 10px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 20px;
+	border-spacing: 10px;
+	text-align:center;
+}
+.headCountText {
+	text-align: left;
+}
+.headCount {
+		border: solid 1px;
+		border-radius: 8px;
+		width: 84px;
+}
+.headCountPlus{
+	width: 20px;
+	background-color: #050540;
+	border-radius: 6px;
+	font-size: 10px;
+	color: white;
+}
+.headCountMinus{
+	width: 20px;
+	background-color: #050540;
+	border-radius: 6px;
+	font-size: 10px;
+	color: white;
+}
+	
+#redo{
+	float:left;
+	width:60px;
+	font-size: 18px;
+	padding: 0;
+	font-size:16px;
+}
+
+#next{
+	float:right;
+	width:60px;
+	font-size: 18px;
+	padding: 0;
+	font-size:16px;
+}
+
+/*특이사항 체크*/
+#remarkSelect {
+	border-radius: 20px;
+	padding: 20px;
+	margin-top:20px;
+}
+
+#remarkSelect > div {
+	margin-bottom: 10px;
+}

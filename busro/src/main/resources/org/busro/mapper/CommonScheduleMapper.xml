@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.busro.mapper.CommonScheduleMapper">
+	<select id="getList" resultType="org.admin.domain.ScheduleVO">
+		<![CDATA[
+		select * from schedule
+    	]]>
+	</select>
+	<select id="readBySnum" resultType="org.admin.domain.ScheduleVO">
+		<![CDATA[
+		select * from schedule
+		where snum=#{snum}
+    	]]>
+	</select>
+	<select id="getSearchedList" resultType="org.admin.domain.ScheduleVO">
+		<![CDATA[
+		select * from schedule
+		where departure=#{departure} and arrival=#{arrival}
+		and (workday=#{leaveDayWeek} or workday='상시')
+		order by st asc
+    	]]>
+	</select>
+	<select id="getDepartureList" resultType="string">
+		<![CDATA[
+		select distinct departure from schedule
+    	]]>
+	</select>
+	<select id="getArrivalList" resultType="string">
+		<![CDATA[
+		select distinct arrival from schedule
+		where departure=#{departure}
+    	]]>
+	</select>
+</mapper>

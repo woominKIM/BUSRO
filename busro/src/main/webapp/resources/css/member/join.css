@@ -1,0 +1,324 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* 화면 전체 렙 */
+.wrapper {
+	width: 100%;
+}
+
+/* content 랩 */
+.wrap {
+	width: 100%;
+	margin: auto;
+}
+/* 페이지 제목 */
+.subjecet {
+	width: 20%;
+	height: 60px;	
+	text-align: center;
+	margin: 0 auto;
+}
+
+.subjecet span {	
+	font-size: 40px;
+	font-weight: 900;	
+	white-space: nowrap;
+}
+
+/* 유효성 검사 문구 */
+.final_id_ck {
+	display: none;
+}
+
+.final_id_ak {
+	display: none;
+}
+
+.final_pw_ck {
+	display: none;
+}
+
+.final_pw_ak {
+	display: none;
+}
+
+.final_pwck_ck {
+	display: none;
+}
+
+.final_name_ck {
+	display: none;
+}
+
+.final_tel_ck {
+	display: none;
+}
+
+.final_birth_ck {
+	display: none;
+}
+
+.final_gender_ck {
+	display: none;	
+}
+
+/* 비밀번호 확인 일치 유효성검사 */
+.pwck_input_re_1 {
+	color: green;
+	display: none;
+}
+
+.pwck_input_re_2 {
+	color: red;
+	display: none;
+}
+
+/* 아이디 영역 */
+.id_wrap {
+	width: 35%;
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;
+}
+
+.id_name {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.id_input_box {
+	/* border: 1px solid black; */
+	height: 31px;
+	padding: 10px 14px;
+	border-top-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+
+.id_input {
+	width: 100%;
+	height: 100%;
+	/* border: none; */
+	font-size: 20px;
+	text-align: center;
+}
+
+/* 중복아이디 존재하지 않는경우 */
+.id_input_re_1 {
+	color: green;
+	display: none;
+}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2 {
+	color: red;
+	display: none;
+}
+
+/* 비밀번호 영역 */
+.pw_wrap {
+	width: 35%;
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;
+}
+
+.pw_name {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.pw_input_box {
+	/* border: 1px solid black; */
+	height: 31px;
+	padding: 10px 14px;
+	border-top-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+
+.pw_input {
+	width: 100%;
+	height: 100%;
+	/* border: none; */
+	font-size: 20px;
+	text-align: center;	
+}
+
+/* 비밀번호 확인 영역 */
+.pwck_wrap {
+	width: 35%;
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;
+}
+
+.pwck_name {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.pwck_input_box {
+	/* border: 1px solid black; */
+	height: 31px;
+	padding: 10px 14px;
+	border-top-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+
+.pwck_input {
+	width: 100%;
+	height: 100%;
+	/* border: none; */
+	font-size: 20px;
+	text-align: center;
+}
+
+.pwck_input1 {
+	width: 10%;
+	height: 10%;
+	border: none;
+	font-size: 15px;
+}
+
+/* 이름 영역 */
+.user_wrap {
+	width: 35%;
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;
+}
+
+.user_name {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.user_input_box {
+	/* border: 1px solid black; */
+	height: 31px;
+	padding: 10px 14px;
+	border-top-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+
+.user_input {
+	width: 100%;
+	height: 100%;
+	/* border: none; */
+	font-size: 20px;
+	text-align: center;
+}
+
+/* 생년월일 영역 */
+.birth_wrap {
+	width: 35%;
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;	
+}
+
+select {
+  width: 31.3%;
+  height: 40px;
+  box-sizing: border-box;
+  margin-left: 5px;
+  padding: 5px 0 5px 10px;  
+  border: 1px solid black;  
+  
+}
+
+.form-select-sm {	
+	font-size: 20px;
+	text-align: center;	
+}
+
+/* 핸드폰 번호 영역 */
+.tel_wrap {
+	width: 35%;
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;
+}
+
+.tel_name {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.tel1_input {
+	width: 15%;
+	height: 40px;
+	border: 1px solid black;	
+	font-size: 20px;
+	text-align: center;
+}
+
+.tel_input {
+	width: 39%;
+	height: 40px;
+	border: 1px solid black;	
+	font-size: 20px;
+	text-align: center;
+}
+
+/* 성별 영역 */
+.gender_wrap {
+	width: 35%;
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;	
+}
+
+.gender_name {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#gender_mw {
+	font-size: 20px;	
+}
+
+#checkboxx {
+	width: 15px;
+	margin-left: 10px;
+	height: 15px;
+}
+
+/* 권한 영역 */
+.auth_wrap {
+	width: 35%;
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;
+}
+
+.auth_name {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#auth_au {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+
+/* 가입하기 버튼 */
+.join_button_wrap {
+	margin: 0 auto;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	padding-top: 30px;
+	text-align: center;
+}
+
+.join_button {
+	width: 10%;
+	height: 40px;
+	background-color: #050540;
+	border-radius: 8px;
+	font-size: 15px;
+	font-weight: 900;
+	color: white;
+}
+
+/* float 속성 해제 */
+.clearfix {
+	clear: both;
+}

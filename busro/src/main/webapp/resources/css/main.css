@@ -1,0 +1,274 @@
+@charset "UTF-8";
+
+/* 갤러리 영역(헤더 + 이미지) */
+.gallary_area{
+	position: relative;
+	background-image: url("/resources/img/12.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0% 60%;
+	width: 100%;
+	min-width:1080px;
+    height: 600px;
+}
+.gallary_area:before{
+	position: absolute;
+	display: flex;
+	font-family:'LotteMartHappy', sans-serif;
+	font-size: 50px;
+	color: white;
+	justify-content:center;
+	align-items:center;
+	content: "고속버스 예약은 버스로";
+	letter-spacing: 20px;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.4);
+}
+
+/* aside + content + footer를 묶는 래퍼 */
+.wrapper{
+	width: 100%;
+}
+
+/* 컨텐츠 영역  */
+.content_area{
+	position:relative;
+	border:20px solid white;
+	border-radius: 20px;
+	background-color:white;
+	width : 1080px;
+	min-height: 900px;
+	margin: -200px auto 0 auto;
+}
+
+/* 맵 + 스케줄 조회 박스 */
+.top_area{
+	width: 1080px;
+    height: 300px;
+    overflow: hidden;
+}
+/* 로고 영역 */
+.map_area{
+	border:1px solid #ccc;
+	border-right: 0;
+	border-radius: 10px 10px 0 10px;
+	width:398px;
+	height:298px;
+	float:left;
+	overflow: hidden;
+}
+/* 검색 박스 영역 */
+.search_area{
+	width:680px;
+    height: 300px;
+	float:left;
+}
+.perfectCircle{
+	display: flex;
+	width:40px;
+	height:40px;
+	border-radius: 50%;	
+	border: 1px solid #cccccc;
+	justify-content: center;
+	align-items: center;
+}
+.terminalSelect {
+	height:32px;
+	background:url('../img/mapMarker.png');
+	background-position: 97% 50%;
+	background-size: 15px;
+	background-repeat: no-repeat;
+}
+.dayInput {
+	height:32px;
+	background:url('../img/calendar.png');
+	background-size: 28px;
+	background-position: 97% 50%;
+	background-repeat: no-repeat;
+}
+#destIconDiv.bgEffect{
+	animation: bgColorChange 0.5s;
+}
+#destIconImg.rotate{
+	transition: all ease 1.4s;
+	transform: rotate(-1turn);
+}
+.rdo_area{
+	width:680px;
+	height:54px;
+}
+.rdoBox{
+	border: 1px solid #ccc;
+	border-radius: 10px 10px 0 0;
+	border-bottom: 0;
+	width:338px;
+	height:53px;
+	float:left;
+	overflow: hidden;
+	position:relative;
+	text-align: center;
+	font-size:24px;
+	font-weight: bold;
+	line-height: 54px;
+	letter-spacing: 8px;
+}
+.rdoBox input[type="radio"] {
+	position:absolute;
+  	width: 100%;
+ 	height: 100%;
+ 	left: 0%;
+  	border: none;
+  	border-radius: 0;
+  	margin-bottom: 0;
+  	margin-right: 0;
+  	background-color: #050540;
+}
+.rdoBox input[type='radio'] + span{
+  color: white;
+  position:absolute;
+  top:0%;
+  left:50%;
+  transform: translate(-50%, 0);
+}
+.rdoBox input[type='radio']:checked{
+	background-color: white;
+}
+
+.rdoBox input[type='radio']:checked + span{
+  color: black;
+  position:absolute;
+  top:0%;
+  left:50%;
+  transform: translate(-50%, 0);
+}
+.search_table{
+	width:100%;
+	height:82%;
+	border:1px solid #ccc;
+	border-top: 0;
+	border-radius: 0 0 10px 0;
+	text-align:center;
+}
+#next{
+	margin-right:20px;
+}
+@keyframes bgColorChange {
+	0%{
+		background-color: #fff;
+	}
+	50%{
+		background-color: #ccc;
+	}
+	100%{
+		background-color: #fff;
+	}
+}
+
+/* 공지사항 영역 */
+.mid_area{
+	width: 1080px;
+    height: 300px;
+    overflow: hidden;
+    padding: 60px 0;
+}
+.mid_table_area{
+	width:500px;
+	height:300px;
+	float:left;
+}
+.mid_table_title{
+	font-size: 30px;
+	text-align: center;
+	padding: 20px 0;
+}
+.tableWrap{
+	border:1px solid #ccc;
+	border-radius: 5px;
+}
+.mid_table{
+	border-collapse: collapse;
+}
+.mid_table th,
+.mid_table td{
+	padding:10px;
+}
+.mid_table tr:not(:last-child) td,
+.mid_table tr:not(:last-child) th{
+	border-bottom: 1px solid #ccc;
+}
+.ads_area{
+	width:552px;
+	height:300px;
+	padding-left:28px;
+	float:right;
+}
+.adsImage{
+	width:550px;
+	height:298px;
+	border:1px solid #ccc;
+	border-radius: 5px;
+}
+/* 로그인 버튼 영역 */
+.login_area{
+	width: 25%;
+	height: 100%;
+	display: inline-block;	
+	text-align: center;		
+}
+.login_button{
+	height: 50%;
+    background-color: #D4DFE6;
+    margin-top: 30px;
+    line-height: 77px;
+    font-size: 40px;
+    font-weight: 900;
+    border-radius: 10px;
+    cursor: pointer;	
+}
+.login_area>span{
+	margin-top: 10px;
+    font-weight: 900;
+    display: inline-block;
+}
+.login_button{
+	height : 50%;
+	background-color: #D4DFE6;
+	margin-top:30px;
+}
+
+/* 로그인 성공 영역 */
+.login_success_area{
+    height: 62%;
+    width: 80%;
+    border: 2px solid #7474ad;
+    border-radius: 15px;
+    margin: 5% auto;
+    padding-top: 5%;
+}
+.login_success_area>span{
+    display : block;
+    text-align: left;
+    margin-left: 10%;
+}
+.login_success_area>a{
+    font-size: 15px;
+    font-weight: 900;
+    display: inline-block;
+    margin-top: 5px;
+    background: #e1e5e8;
+    width: 82px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 25px;
+    color: #606267;    
+}
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}
+
+/* 컨텐츠 영역 */

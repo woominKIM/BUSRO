@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+body{
+	width: 100% !important;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+	border-bottom: 1px solid #aaa;
+	padding: 22px;
+	text-align: center;
+}
+tbody > tr:last-child > td {
+	border-bottom:none;
+}
+thead td {
+  	font-size: 30px;
+}
+tbody td {
+	font-size: 20px;
+}
+#contentWrap{
+	width:1080px;
+	margin: 0 auto;
+	min-height: 60vh;
+}
+.confirmTitle{
+	text-align:center;
+	padding:30px;
+	font-size: 20px !important;
+}
+.tableWrap{
+	border:1px solid #aaa;
+	border-radius: 20px;
+ 	margin: 10px;
+}
+.goImg {
+	margin: 0 20px;
+	width: 20px;
+}
+
+#discountInfo{
+	width:50%;	
+}
+
+#redo{
+	float:left;
+	width:10%;
+}
+
+#next{
+	float:right;
+	width:10%;
+}
+

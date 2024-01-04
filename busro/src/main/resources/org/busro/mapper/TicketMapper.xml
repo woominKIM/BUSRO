@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.busro.mapper.TicketMapper">
+	<select id="getList" resultType="org.admin.domain.TicketVO">
+		select * from ticket 
+		<trim prefix="WHERE">
+			<choose>
+				<when test="type == 'R'.toString()">
+					rno like '%'||#{keyword}||'%'
+				</when>
+				<when test="type == 'I'.toString()">
+					id = #{keyword}
+				</when>
+				<when test="type == 'N'.toString()">
+					id in (select id from member where name like '%'||#{keyword}||'%')
+				</when>
+				<when test="type == 'T'.toString()">
+					TO_CHAR(tdate,'""YYYY"년 "MM"월 "DD"일"') like '%'||#{keyword}||'%'
+				</when>
+				<when test="type == 'D'.toString()">
+					snum in (select snum from schedule where departure like '%'||#{keyword}||'%')
+				</when>
+				<otherwise></otherwise>
+			</choose>
+		</trim>
+		order by mnum desc
+	</select>
+	<select id="getListBySnum" resultType="org.admin.domain.TicketVO">
+		<![CDATA[
+		select * from ticket
+		where snum=#{snum}
+    	]]>
+	</select>
+	<select id="getListBySnumAndDDate" resultType="org.admin.domain.TicketVO">
+		<![CDATA[
+		select * from ticket
+		where snum=#{snum}
+		and TO_CHAR(ddate,'YYYY-MM-DD')=#{ddate}
+    	]]>
+	</select>
+	<select id="getCountBySnumAndDDate" resultType="int">
+		<![CDATA[
+		select count(*) from ticket
+		where snum=#{snum}
+		and TO_CHAR(ddate,'YYYY-MM-DD')=#{ddate}
+    	]]>
+	</select>
+	
+	<insert id="insertOneWay">
+		insert into ticket (mnum,snum,rno,ddate,id,seatnum,ptype,pet)
+		values (seq_ticket_mnum.nextval,#{ticketDTO.snum},'O'||seq_ticket_rno_o.nextval,TO_DATE(#{ticketDTO.dDate},'YYYY/MM/DD HH24:MI:SS'),#{id},#{ticketDTO.seatNum},#{ticketDTO.pType},#{ticketDTO.pet})
+	</insert>
+	<insert id="insertRoundTrip">
+		insert into ticket (mnum,snum,rno,ddate,id,seatnum,ptype,pet)
+		values (seq_ticket_mnum.nextval,#{ticketDTO.snum},'R'||seq_ticket_rno_r.currval,TO_DATE(#{ticketDTO.dDate},'YYYY/MM/DD HH24:MI:SS'),#{id},#{ticketDTO.seatNum},#{ticketDTO.pType},#{ticketDTO.pet})
+	</insert>
+	<insert id="insertRoundTripWithSequenceIncrease">
+		insert into ticket (mnum,snum,rno,ddate,id,seatnum,ptype,pet)
+		values (seq_ticket_mnum.nextval,#{ticketDTO.snum},'R'||seq_ticket_rno_r.nextval,TO_DATE(#{ticketDTO.dDate},'YYYY/MM/DD HH24:MI:SS'),#{id},#{ticketDTO.seatNum},#{ticketDTO.pType},#{ticketDTO.pet})
+	</insert>
+	
+	<delete id="deleteOneWayTicket">
+		delete from ticket
+		where rno=#{rno}
+	</delete>
+	<delete id="deleteRoundTripTicket">
+		delete from ticket
+		where rno=#{rno} and snum=#{snum}
+	</delete>
+	
+	<update id="updateRoundTripToOneWay">
+		update ticket set rno='O'||seq_ticket_rno_o.nextval
+		where rno=#{rno}
+	</update>
+</mapper>

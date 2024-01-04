@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+/* 전체 영역 고정 */
+#contentWrap{
+	width:1080px;
+	margin: 0 auto;
+}
+
+
+.row1{
+	padding: 0 27px 10px 12px;
+    float: left;
+    width: 110px;
+}
+
+.row1 div{
+	margin-bottom: 5px;
+}
+
+.row2 { 
+	padding: 0 27px 10px 12px;
+    float: left;
+    width: 110px;
+}
+
+.row2 div{
+	margin-bottom: 5px;
+}
+
+.row3 { 
+	margin-top: 136px;
+    padding: 0 27px 10px 12px;
+    float:left;
+    width: 110px;
+}
+
+.row3 div{
+	margin-bottom: 5px;
+}
+
+.row4{
+    padding: 0 27px 10px 16px;
+    float: left;
+    width: 210px;
+}
+
+.row5{
+    padding: 0 27px 10px 12px;
+    float: left;
+    width: 210px;
+}
+
+.row4 div{
+	margin-bottom: 5px;
+}
+
+.row5 div{
+	margin-bottom: 5px;
+}
+
+
+/* 노선 관리 모달 input */
+
+.roin{
+	border: 0.5px solid #bdbdbd !important;
+	border-radius: 4px;
+	padding: 0.375rem 0.75rem; 
+	line-height: 1.5;
+	width: 70px;
+    margin-top: 6px;
+}
+
+.roin:disabled{
+	background: #fbfbfb !important;
+	color: black;
+}
+
+/* 예매 관리 모달 input */
+
+.input_box{
+	border: 0.5px solid #bdbdbd !important;
+	margin-top: 6px;
+	border-radius: 4px;
+	padding: 0.375rem 0.75rem; 
+	width: 90%;
+}
+
+
+
+
+
+/* 노선 관리 모달창 영역 */
+.getInfo{
+	background-color: white;
+	/*#ff3669 rgb(238, 106, 123) */
+	border: solid 2px #ff3669;
+	height: auto;
+	width: 465px;
+	position: relative ;
+	margin: 30px;
+	overflow: hidden;
+	border-radius: 4px;
+	
+	
+}
+
+/* 노선 관리 모달 속 label */
+.modal-body label{
+	padding-right: 41px;
+}
+
+/* 예매 관리 모달 속 label */
+
+.m_body label{
+	text-align: left;
+	padding-right: 149px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	
+}
+/* 예매 관리 모달 바디 */
+.m_body{
+	padding-left: 10px;
+	display: block;
+	padding-top: 10px;
+	margin-top: 7px;
+}
+
+/* 예매관리 모달창 영역 */
+
+.getInfo2{
+	background-color: white;
+	border: solid 2px #ff3669;
+	height: auto;
+	width: 530px;
+	position: relative ;
+	margin: 30px;
+	overflow: hidden;
+	border-radius: 4px;
+}
+
+/* 모달창 속 버튼 */
+/* 공통 */
+
+#initX{
+	border-radius: 4px;
+	border-color: transparent;
+	background-color: white;
+	background-image: none;
+	display: inline-block;
+	padding: 6px 18px;
+	vertical-align: middle;
+	/* color: #233F6F; */
+	/* #ff3669 */
+	color: black;
+	float: right;
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 10px;
+	
+}
+
+/* 노선 관리 */
+
+.hanX{
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-image: none;
+	display: inline-block;
+	text-align: center;
+	padding: 6px 12px;
+	vertical-align: middle;
+	/* background-color: #233F6F;  */
+	background-color: #ff3366; 
+	color: white;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-right: 43px; 
+	float: right;
+	
+	
+}
+
+.hanX:hover{
+	background-color: #233F6F;
+}
+
+/* 예매관리 */
+
+.hanX2{
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-image: none;
+	display: inline-block;
+	text-align: center;
+	padding: 6px 12px;
+	vertical-align: middle;
+	background-color: #ff3366;
+	/* background-color: rgb(238, 106, 123); */
+	color: white;
+	margin-top: 30px;
+	margin-bottom: 26px;
+	margin-right: 42px; 
+	float: right;
+}
+
+.hanX2:hover{
+	background-color: #233F6F;
+}
+
+

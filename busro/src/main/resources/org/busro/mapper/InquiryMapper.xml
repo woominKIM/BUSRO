@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.busro.mapper.InquiryMapper">
+
+	<!-- 회원 문의 등록 -->
+	<insert id="inquiryRegister">
+		insert into inquiry (ino, writer, title, content, category) 
+		values(SEQ_INQUIRY_INO.nextval, #{writer}, #{title}, #{content}, #{category})
+	</insert>
+	
+	
+	<!-- 회원 문의 수정 -->
+	<update id="userInquiryChange">
+		update inquiry set 
+		title = #{title}, content = #{content}, category = #{category}
+		where ino = #{ino}
+	</update>
+
+	<!-- 회원 문의 삭제 -->
+
+	<delete id="userInquiryDelete">
+		delete from inquiry where ino = #{ino}
+	</delete>
+
+
+	<resultMap type="org.admin.domain.InquiryVO" id="b">
+		<result property="ino" column="ino"/>
+		<result property="writer" column="writer"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="regdate" column="regdate"/>
+		<result property="category" column="category"/>
+		<collection property="memberVO" ofType="org.busro.domain.MemberVO" >
+			<result property="name" column="name"/>
+		</collection>
+		<collection property="answerVO" ofType="org.admin.domain.AnswerVO">
+			<result property="ano" column="ano"/>
+		</collection>
+		
+	</resultMap>
+
+	<!-- join 예시 쿼리, 사용X -->
+	<select id="getqlist" resultMap="b" >
+	
+	select i.writer, i.title, i.content, m.name
+	 from inquiry i, member m where i.writer = m.id
+	</select>
+	
+	<!-- 회원용 리스트 조회 -->
+	<select id="myList" resultType="org.admin.domain.InquiryVO">
+		<![CDATA[
+		select ino, writer, title, content, regdate, category
+		from 
+		(
+			select /*+INDEX_DESC(inquiry) */
+				rownum rn, ino, writer, title, content, regdate, category 
+				from inquiry where writer = #{memberVO.id} and rownum <= #{cri.pageNum} * #{cri.amount}
+				)
+				where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		 
+		]]> 
+	</select>
+	
+	<!-- 관리자용 리스트 조회 -->
+	<!-- !! inquiry로 조회한 값들로 조인하고 싶은것. 하나의 구문을 테이블처럼 감싸서 조인 후 다시 감싸줘야 내림차순 정렬이 적용된다. !! -->
+	<select id="getInquiryList" resultType="org.admin.domain.InquiryVO">
+	<![CDATA[
+	
+	 select * from (
+			select rn, i.ino, i.writer, i.title, i.content, i.regdate, i.category, a.ano, m.name  
+			from 
+			(select /*+INDEX_DESC(inquiry) */
+					rownum rn, inquiry.* from inquiry) i  left outer join answer a 
+						on i.ino = a.ino 
+						inner join member m
+						on i.writer = m.id  where
+											
+		]]>
+		<include refid="criteria"></include>
+	<![CDATA[			
+					rownum <= #{pageNum} * #{amount}
+					
+         		  )
+         		  where rn > (#{ pageNum} -1) * #{amount} 
+			 	order by ino desc 
+			]]> 
+	</select>
+	
+	<!-- foreach는 collection(list나 array로만 받을 수 있음)이 필요함 -->
+	<sql id="criteria">
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+				<foreach collection="typeArr" item="type">
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 'R'.toString()">
+								ano is not null
+							</when>
+							<when test="type == 'C'.toString()">
+								ano is null
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim> 
+		</sql>
+	
+	<!-- 관리자 검색 기능 -->
+	<sql id="adminSearch">
+		select rownum rn, i.ino, a.ano, i.title, i.writer, i.category, m.name, NVL(a.ano,-1) as tf
+			from inquiry i left outer join answer a 
+				on i.ino = a.ino 
+				inner join member m 
+				on i.writer = m.id 
+				
+		<trim prefix="where">
+			<choose>
+				<when test="type == 'waR'.toString()">
+					NVL(a.ano,-1) = -1 order by ino desc
+				</when>
+				<when test="type == 'anC'.toString()">
+					 NVL(a.ano,-1) = #{ano} order by ino desc
+				</when>
+				<otherwise></otherwise>
+			</choose>
+		</trim>
+	</sql>
+	
+	
+	<!-- 관리자용 -->
+	<select id="getTotal" resultType="int">
+			<![CDATA[
+				select count(*)  
+				from 
+				(
+					select /*+INDEX_DESC(i) */
+						rownum rn, i.ino, a.ano, i.title, i.writer, m.name, i.content, i.category, i.regdate  
+				from inquiry i left outer join answer a 
+				on i.ino = a.ino 
+				inner join member m
+				on i.writer = m.id  where
+			]]>
+		<include refid="criteria"></include> 
+		<![CDATA[
+			
+			 i.ino > 0
+			)		
+		]]>
+		
+			
+	</select>
+
+	
+	<!-- 회원용 -->
+	<select id="getUserTotal" resultType="int">
+		select count(*) from inquiry where writer = #{writer}
+	</select>
+	
+	<!-- 회원용 상세 보기 -->
+	<select id="inquiryDetail" resultMap="b">
+		select i.*, m.name from inquiry i, member m where ino = #{ino} and i.writer = m.id
+	</select>
+	
+	<!--  <select id="inquiryDetail" resultType="org.admin.domain.InquiryVO">
+		select * from inquiry where ino = #{ino}
+	</select>  -->
+	
+
+</mapper>

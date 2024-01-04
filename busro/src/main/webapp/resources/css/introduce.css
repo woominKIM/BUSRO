@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+/* 갤러리 영역(헤더 + 이미지) */
+.gallary_area{
+	position: relative;
+	background-color: cornsilk;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0% 60%;
+	width: 100%;
+	min-width:1080px;
+    height: 600px;
+}
+.gallary_area:before{
+	position: absolute;
+	display: flex;
+	font-family:'LotteMartHappy', sans-serif;
+	font-size: 50px;
+	color: black;
+	justify-content:center;
+	align-items:center;
+	content: "USER GUIDE";
+	letter-spacing: 20px;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0);
+}
+
+/* aside + content + footer를 묶는 래퍼 */
+.wrapper{
+	width: 100%;
+	min-width: 1080px;
+}
+
+/* 컨텐츠 영역  */
+.content_area{
+	position:relative;
+	border:20px solid white;
+	border-radius: 20px;
+	background-color:white;
+	width : 880px;
+	height: 1000px;
+	margin: -200px auto 0 auto;
+}
+
+/* 맵 + 스케줄 조회 박스 */
+.top_area{
+	width: 878px;
+    height: 998px;
+    border-radius: 10px;
+	border:1px solid #ccc;
+    overflow: hidden;
+}

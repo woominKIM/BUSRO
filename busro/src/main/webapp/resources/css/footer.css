@@ -1,0 +1,48 @@
+/*- - - - - - - - - - - - - - - - - 푸터영역 - - - - - - - - - - - - - -*/
+
+
+/* 푸터 전체 */
+#footerWrap {
+	display:flex;
+	background-color: #f8f8f8;
+	width:100%;
+	min-width: 1080px;
+	height:300px;
+	margin-top:100px;
+	align-items: center;
+	justify-content: center;
+}
+#footer{
+	width:1080px;
+	height:200px;
+}
+.footer_img{
+	text-align: right;
+}
+/* 푸터 테이블 */
+.footerTable {
+	width:auto;
+}
+.footerTable td{
+	padding: 10px;
+	color:#666;
+	border-bottom: none;
+	font-size: 16px !important;
+}
+
+.seperateTd12 > td{
+	position:relative;
+}
+.seperateTd12 > td:not(:last-child):after{
+	position:absolute;
+	content:"";
+	right:0;
+	top : 50%;
+	transform:translate(0%,-50%);
+	height : 12px;
+	width: 0;
+	border-right: 1px solid #ccc;
+}
+.seperateTd12 > td:last-child{
+	border-right: 0;
+}

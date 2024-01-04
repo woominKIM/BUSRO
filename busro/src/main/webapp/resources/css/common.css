@@ -1,0 +1,230 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&family=Roboto:wght@300&display=swap');
+
+/*공통 기능*/
+*{
+	margin: 0;
+	padding:0;
+}
+body{
+	width:100%;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+body,
+h1, h2, h3, h4, h5, h6, table,
+input, select, textarea, a, button {
+	font-family: "roboto","Noto Sans KR",sans-serif;
+    font-size: 16px;
+}
+button {
+	background-color: #050540;
+	color: white;
+	border-radius: 8px;
+	border-width: 0;
+	padding: 6px 20px 9px 20px;
+	cursor:pointer;
+}
+select {
+	appearance:none;
+	border-left-width:0;
+	border-right-width:0;
+	border-top-width:0;
+}
+input[type="text"] {
+	appearance:none;
+	border-left-width:0;
+	border-right-width:0;
+	border-top-width:0;
+	border-bottom-width:1px;
+	background-color: white;
+}
+input[type="radio"] {
+	appearance:none;
+  	width: 14px;
+ 	height: 14px;
+  	border: 1px solid #050540;
+  	border-radius: 100%;
+  	margin-bottom: -2px;
+  	margin-right: 5px;
+}
+input[type='radio']:checked {
+  background-color: #050540;
+}
+ul, li {
+	list-style: none;
+}
+
+/* 폰트 크기*/
+.smallFont10 {
+	font-size: 10px;
+}
+.smallFont20 {
+	font-size: 20px;
+}
+.smallFont24 {
+	font-size: 24px;
+}
+.bigFont30 {
+	font-size: 30px;
+}
+.bigFont40 {
+	font-size: 40px;
+}
+.bigFont50 {
+	font-size: 50px;
+}
+
+/* 폰트 정렬*/
+.centerFont{
+	text-align: center;
+}
+
+/*짧은 밑줄 적용(블럭요소)*/
+.underscore30:after {
+	content: "";
+  	display: block;
+  	width: 30px;
+  	border-bottom: 1px solid #ccc;
+  	margin: -0px auto; 
+}
+.underscore40:after {
+	content: "";
+  	display: block;
+  	width: 40px;
+  	border-bottom: 1px solid #ccc;
+  	margin: -0px auto; 
+}
+.underscore60:after {
+	content: "";
+  	display: block;
+  	width: 60px;
+  	border-bottom: 1px solid #ccc;
+  	margin: -0px auto; 
+}
+.underscore120:after {
+	content: "";
+  	display: block;
+  	width: 120px;
+  	border-bottom: 1px solid #ccc;
+  	margin: -0px auto; 
+}
+.underscore200:after {
+	content: "";
+  	display: block;
+  	width: 200px;
+  	border-bottom: 1px solid #ccc;
+  	margin: -0px auto; 
+}
+.underscore260:after {
+	content: "";
+  	display: block;
+  	width: 260px;
+  	border-bottom: 1px solid #ccc;
+  	margin: -0px auto; 
+}
+
+/* 테이블 요소 분리(tr에 적용) */
+
+.seperateCompletly {
+	position:relative;
+	height:100%;
+}
+.seperateCompletly:after {
+	position:absolute;
+	content:"";
+	right:0;
+	top : 50%;
+	transform:translate(0%,-50%);
+	height : 100% !important; 
+	width: 0;
+	border-right: 1px solid #ccc;
+}
+
+.seperateTh26 > th{
+	position:relative;
+}
+.seperateTh26 > th:not(:last-child):after{
+	position:absolute;
+	content:"";
+	right:0;
+	top : 50%;
+	transform:translate(0%,-50%);
+	height : 26px;
+	width: 0;
+	border-right: 1px solid #ccc;
+}
+.seperateTh26 > th:last-child{
+	border-right: 0;
+}
+
+.seperateTh30 > th{
+	position:relative;
+}
+.seperateTh30 > th:not(:last-child):after{
+	position:absolute;
+	content:"";
+	right:0;
+	top : 50%;
+	transform:translate(0%,-50%);
+	height : 30px;
+	width: 0;
+	border-right: 1px solid #ccc;
+}
+.seperateTh30 > th:last-child{
+	border-right: 0;
+}
+
+.seperateTd26 > td{
+	position:relative;
+}
+.seperateTd26 > td:not(:last-child):after{
+	position:absolute;
+	content:"";
+	right:0;
+	top : 50%;
+	transform:translate(0%,-50%);
+	height : 26px;
+	width: 0;
+	border-right: 1px solid #ccc;
+}
+.seperateTd26 > td:last-child{
+	border-right: 0;
+}
+
+.seperateTd40 > td{
+	position:relative;
+}
+.seperateTd40 > td:not(:last-child):after{
+	position:absolute;
+	content:"";
+	right:0;
+	top : 50%;
+	transform:translate(0%,-50%);
+	height : 40px;
+	width: 0;
+	border-right: 1px solid #ccc;
+}
+.seperateTd40 > td:last-child{
+	border-right: 0;
+}
+
+.seperateTd60 > td{
+	position:relative;
+}
+.seperateTd60 > td:not(:last-child):after{
+	position:absolute;
+	content:"";
+	right:0;
+	top : 50%;
+	transform:translate(0%,-50%);
+	height : 60px;
+	width: 0;
+	border-right: 1px solid #ccc;
+}
+.seperateTd60 > td:last-child{
+	border-right: 0;
+}

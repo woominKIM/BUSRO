@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="org.busro.mapper.MemberMapper">
+  
+  	<select id="getList" resultType="org.busro.domain.MemberVO">
+  		select * from member
+  	</select>
+  	
+  	<select id="getListWithPaging" resultType="org.busro.domain.MemberVO">
+		<![CDATA[
+		select * from
+		(
+		select /*+index_desc(member pk_member) */
+			rownum rn, id, pass, name, birth, tel, gender, auth
+		from member
+		where 
+		]]>	
+		<if test="(type == 'n'.toString()) and (keyword != null and keyword != ''.toString())">
+  			<if test="keyword != null">
+  				name like '%'||#{keyword}||'%' AND
+  			</if>  			
+  		</if>
+  		
+  		<if test="(type == 'i'.toString()) and (keyword != null and keyword != ''.toString())">
+  			
+  				id like '%'||#{keyword}||'%' AND
+  			
+  		</if>
+  		
+  		<if test="(type == 'a'.toString()) and (keyword != null and keyword != ''.toString())">
+  			<if test="keyword != null">
+  				auth like '%'||#{keyword}||'%' AND
+  			</if>
+  		</if>
+  		
+  		<![CDATA[
+  			rownum <= #{pageNum} * #{amount}
+		)
+		where rn > (#{pageNum}-1) * #{amount}
+  		]]>
+  			
+  	</select>
+  	
+  	<select id="getTotalCount" resultType="int">
+  		select count(*) from 
+  		(
+		select /*+index_desc(member pk_member) */
+			rownum rn, id, pass, name, birth, tel, gender, auth
+		from member
+		where		
+		<if test="(type == 'n'.toString()) and (keyword != null and keyword != ''.toString())">
+  			<if test="keyword != null">
+  				name like '%'||#{keyword}||'%' AND
+  			</if>  			
+  		</if>
+  		
+  		<if test="(type == 'i'.toString()) and (keyword != null and keyword != ''.toString())">
+  			
+  				id like '%'||#{keyword}||'%' AND
+  			
+  		</if>
+  		
+  		<if test="(type == 'a'.toString()) and (keyword != null and keyword != ''.toString())">
+  			<if test="keyword != null">
+  				auth like '%'||#{keyword}||'%' AND
+  			</if>
+  		</if>
+  		
+  		<![CDATA[
+  			rownum > 0
+  			)		
+  		]]>
+  	</select>
+  	
+  	<select id="search" resultType="org.busro.domain.MemberVO">
+  		select * from member
+  		
+  		<if test="(type == 'n'.toString()) and (keyword != null and keyword != ''.toString())">
+  			<if test="keyword != null">
+  				where name like '%'||#{keyword}||'%'
+  			</if>  			
+  		</if>
+  		
+  		<if test="(type == 'i'.toString()) and (keyword != null and keyword != ''.toString())">
+  			
+  				where id like '%'||#{keyword}||'%'
+  			
+  		</if>
+  		
+  		<if test="(type == 'a'.toString()) and (keyword != null and keyword != ''.toString())">
+  			<if test="keyword != null">
+  				where auth like '%'||#{keyword}||'%'
+  			</if>
+  		</if>
+  		
+  	</select>
+  	
+  	
+  	<insert id="memberJoin">
+  		insert into member (id, pass, name, birth, tel, gender, auth)
+  		values(#{id}, #{pass}, #{name}, #{birth}, #{tel}, #{gender}, #{auth})
+  	</insert>  	
+  	
+  	<!-- 아이디 중복검사 -->
+  	<select id="idCheck" resultType="int">  	
+  		select count(*) from member where id = #{id}  	
+  	</select>
+  
+  	<!-- 로그인 -->
+  	<!-- 제출받은 로그인, 비밀번호 데이터와 비교하여 일치하는 데이터가 있을 시 해당 아이디의 정보를 반환 -->
+  	<select id="memberLogin" resultType="org.busro.domain.MemberVO">
+  		select
+  		id, pass, name, birth, tel, gender, auth
+  		from member
+  		where
+  		id = #{id} and pass = #{pass}  		 
+  	</select>
+  	
+  	<!-- 아이디 찾기 -->
+  	<select id="find_id"  resultType="string">
+  		select id from member where name = #{name} and birth = #{birth} and tel = #{tel}
+  	</select>	
+	
+	<!-- 비번 찾기 -->
+	<select id="find_pw" resultType="org.busro.domain.MemberVO">
+		select * from member where id = #{id} and tel = #{tel}
+	</select>
+	
+	<!-- 비번 수정 -->
+	<update id="modifyPass" >
+		update member set pass = #{pass} where id = #{id} and tel = #{tel}
+	</update>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateMember">
+		update member
+		set
+		name = #{name},
+		pass = #{pass},		
+		tel = #{tel},
+		birth = #{birth}
+		where id = #{id}
+	</update>
+	
+	<!-- 관리자 페이지 - 회원리스트 회원정보 수정 -->
+	<update id="updateMember1">
+		update member
+		set
+		pass = #{pass},
+		name = #{name},				
+		tel = #{tel},
+		birth = #{birth},
+		auth = #{auth}
+		where id = #{id}
+	</update>	
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete">
+		delete from member where id = #{id} and pass = #{pass}
+	</delete>
+	
+	<!-- 회원탈퇴를 위한 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+		select count(*) from member where id = #{id} and pass = #{pass}
+	</select>
+	
+	<!-- 회원삭제 -->
+	<delete id="memberDelete1">
+		delete from member where id = #{id}
+	</delete>
+	
+	<!-- 아이디 검색 -->
+	<select id="searchId" resultType="org.busro.domain.MemberVO">
+		select * from member where id = #{id}
+	</select>
+	
+	
+  	
+  
+  </mapper>

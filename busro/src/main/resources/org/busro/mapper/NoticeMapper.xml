@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.busro.mapper.NoticeMapper">
+	
+	<select id="getList" resultType="org.busro.domain.NoticeVO"> <!-- id는 메소드명 -->
+		<![CDATA[
+		
+		select * from NOTICE order by nno desc
+		
+	
+]]>
+	 </select>
+	 
+	 <select id="getTopList" resultType="org.busro.domain.NoticeVO" >
+	 <![CDATA[
+	 	select  * from 
+			(select  * from notice where top in('Y','y') order by regdate desc)
+ 		
+	 	]]>
+	 </select>
+	 
+	 
+	 
+	 <insert id="insert">
+	 insert into NOTICE (nno, writer, title, content)
+	 values (SEQ_NOTICE_NNO.NEXTVAL, #{writer}, #{title}, #{content})
+	 </insert>
+	 
+	 <insert id="insertSelectKey">
+	 
+		 <selectKey keyProperty="nno" order="BEFORE" resultType="long">
+		select SEQ_NOTICE_NNO.NEXTVAL from dual
+		 </selectKey>
+	 insert into NOTICE (nno, writer, title, content, REGDATE, top)
+	 values (#{nno}, #{writer}, #{title}, #{content}, sysdate, #{top})
+	 </insert>
+	 
+	 <select id="read" resultType="org.busro.domain.NoticeVO">
+	 <![CDATA[
+		select * from NOTICE where nno = #{nno}
+		]]>
+	 </select>
+	 
+	 <delete id="delete">
+	 	delete from NOTICE where nno = #{nno}
+	 </delete>
+	 
+	 <update id="update">
+	 	update NOTICE set	 	
+	 	title = #{title},
+	 	content = #{content},
+	 	top	= #{top}
+	 	
+	 	where nno = #{nno}
+	 </update>
+	 
+        <sql id="criteria">  
+         <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+         	<foreach item='type' collection="typeArr">
+         		<trim prefix="OR">
+         			<choose>
+         				<when test="type == 'T'.toString()">
+         				 title like '%'||#{keyword}||'%'
+         				</when>
+         				<when test="type == 'W'.toString()">
+         				 writer like '%'||#{keyword}||'%'
+         				</when>
+         				<when test="type == 'C'.toString()">
+         				 content like '%'||#{keyword}||'%'
+         				</when>
+         			</choose>
+         		</trim>
+         	</foreach>
+         </trim>
+        </sql>
+        
+        <select id="getListWithPaing" resultType="org.busro.domain.NoticeVO"> <!-- id는 메소드명 -->
+		<![CDATA[
+		select rn, nno, writer, title, content, regdate, top from(
+			select /*+ INDEX_DESC(NOTICE) */
+            rownum rn, nno, writer, title, content, regdate, top from NOTICE 
+           where 
+          ]]>
+          
+          	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+          		<foreach item="type" collection="typeArr">
+          			<trim prefix="OR">
+          				<choose>
+          					<when test="type == 'T'.toString()">
+          						title like '%'||#{keyword}||'%'
+          					</when>
+          					<when test="type == 'W'.toString()">
+          						writer like '%' ||{keyword}||'%'
+          					</when>
+          					<when test="type == 'C'.toString()">
+          						content like '%'||#{keyword}||'%'
+          					</when>
+          				</choose>
+          			</trim>
+          		</foreach>
+          	</trim>
+          
+           <include refid="criteria"></include> 
+          <!-- include -->
+         
+      
+       <![CDATA[     
+             rownum <= #{pageNum} * #{amount}
+		) where rn > (#{pageNum} -1) * #{amount}
+	 
+	 ]]>
+
+</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from NOTICE where 
+		
+		<include refid="criteria"></include> 
+		
+		nno > 0
+	</select>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

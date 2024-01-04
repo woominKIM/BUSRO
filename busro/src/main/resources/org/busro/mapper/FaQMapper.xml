@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.busro.mapper.FaQMapper">
+
+<sql id="criteria">
+		<!--시작되는 부분은 ("  이부분이 접미사부분=기호까지")  시작될때 or가 있어서 문제가 발생할 문구or -->
+		<trim prefix="("  suffix=") and " prefixOverrides="or">
+			<!--반복 구문  item 은 반복될때 list부분으로 변수로 해당된다 map에서는 val에 해당됨 collection은 맵이나 리스트 배열등 -->
+			<!--검색으로 넘어오는 item에는 name="type" 로 넘어와서 criteria부분에서 type에 해당됨  -->	
+			<foreach collection="typeArr" item="type"> <!--컬렉션 typeArr의 리턴값은 String[]이다  -->
+				<!--  ( 이부분에서 반복되는 구문으로 or을 넣는다 하지만 위에 or을 만나서 오류발생여부 or삭제) -->
+				<trim prefix="or">
+					<!--전달받은 collection안에 값이 T냐 C냐에 따라 아래 선택해서 수행  -->
+					<choose>
+					<!-- 전달받은 type의 변수명의 값이 T냐 C에 따라 수행 하는 쿼리문이 다르다 || 이부분은 붙여쓰는것으로 공백을 없애는 용도  -->
+						<when test="type == 'q'.toString()">
+							question like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'a'.toString()">
+							answer like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'c'.toString()">
+							category like '%'||#{keyword}||'%'
+						</when>
+					
+						
+						
+						<!--기본적으로 만들길 when만 있다  -->
+					</choose>
+				</trim>
+			</foreach>		
+		</trim>
+	</sql>
+
+	<select id="getList" resultType="org.busro.domain.FaQVO">
+	
+	<![CDATA[	
+		select * from (select /*+ INDEX_DESC(FAQ) */  rownum rn, FAQ.* from FAQ where
+		]]>	
+		
+		<include refid="criteria"></include>
+		<!-- include를 사용시 기존 sql의 id를 통해 불러온 부분을 붙여 넣을 수 있다  -->
+		<!--  select * from (select /*+ INDEX_DESC(tbl_board) */  rownum rn, tbl_board.* from tbl_board 
+			
+			where  이다음 부분에 기존 작성된 sql id criteria의 
+			
+			( 이부분부터 추가로 작성되어서 마지막에 ) 로 끝나는 구문이 되며 추가적으로 마지막에 and로 끝나서 다음구문인
+			
+			 rownum <= #{pageNum} * #{amount} 
+		)  where rn > (#{pageNum}  -1) * #{amount} 이부분이 추가되어서 구문이 오류 없이 잘 돌아갈수 있도록 작성한다.	
+		
+		
+		 -->
+		
+		<![CDATA[
+		 rownum <= #{pageNum} * #{amount} 
+		)  where rn > (#{pageNum}  -1) * #{amount}
+	
+		]]>		
+	
+	</select>
+	
+	<select id="serch" resultType="org.busro.domain.FaQVO">
+	<![CDATA[
+	select * from FAQ where category = #{category}
+	]]>
+	</select>
+	
+	<insert id="insert">
+	
+	insert into  FAQ(fno,writer,question,answer,category,regdate)
+	 values (SEQ_FAQ_FNO.nextval,#{writer},#{question},#{answer},#{category},sysdate)
+	</insert>	
+	
+	<select id="read" resultType="org.busro.domain.FaQVO">
+	
+	select * from FAQ where  fno = #{fno}
+	
+	
+	</select>
+	
+	<update id="update">
+	UPDATE FAQ
+	SET
+	answer= #{answer},
+	question= #{question},
+	CATEGORY= #{category}
+	WHERE
+	fno = #{fno}
+	</update>
+	
+	<delete id="delete">
+		delete from faq where fno = #{fno}
+	</delete>
+		<select id="getTotalCount" resultType = "int"> <!-- id는 메소드명 -->
+			select count(*) from FAQ where 
+			<include refid="criteria"></include>
+
+	<![CDATA[			
+			fno > 0
+			]]>	
+	</select>
+	
+	
+</mapper>
+

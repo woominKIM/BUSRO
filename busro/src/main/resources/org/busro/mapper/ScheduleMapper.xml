@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.busro.mapper.ScheduleMapper">
+
+	<!-- 도착지를 셀렉하면 출발지 리로드 -->
+	<select id="searchDeparture" resultType="org.admin.domain.ScheduleVO">
+		
+			select distinct departure from schedule 
+			
+			<choose>
+				<when test="depart == null">
+					<trim prefixOverrides="where" suffix=" order by departure" >
+						 where
+					</trim>
+				</when>
+				<otherwise>
+					<trim suffix=" order by departure" >
+						where arrival = #{arrival} 
+					</trim>
+				</otherwise>
+			</choose>
+
+	</select>
+	
+	<!-- 출발지를 셀렉하면 도착지 리로드 -->
+	<select id="searchArrival" resultType="org.admin.domain.ScheduleVO">
+	
+		select distinct arrival from schedule 
+			
+			<choose>
+				<when test="destination == null">
+					<trim prefixOverrides="where" suffix=" order by arrival" >
+						 where
+					</trim>
+				</when>
+				<otherwise>
+					<trim suffix=" order by arrival" >
+						where departure = #{departure}
+					</trim>
+				</otherwise>
+			</choose>
+		
+	</select>
+	
+	
+	<select id="searchGrade" resultType="org.admin.domain.ScheduleVO">
+		select * from schedule where grade = #{grade}
+	</select>
+	
+	<select id="searchTime" resultType="org.admin.domain.ScheduleVO">
+		select substr(st, 1, 2) from schedule 			
+	</select>
+	
+	
+	
+	<select id="detail" resultType="org.admin.domain.ScheduleVO">
+		
+		select grade, departure, arrival, workday, st, eta, price from schedule where snum = #{snum}
+		
+	</select>
+	
+	<!-- 노선 등록 중복 체크 -->
+	<select id="sortingDuplicate" resultType="int">
+	
+		select count(*) from schedule where departure = #{departure} and arrival = #{arrival} and st = #{st}
+	
+	</select>
+	
+	
+	<!-- 등록쿼리 -->
+	
+	<insert id="insert">
+		insert into schedule(snum, grade, departure, arrival, workday, st, eta, price) 
+		values(seq_schedule_snum.nextval, #{grade},#{departure},#{arrival},#{workday},#{st},#{eta},#{price})
+	</insert>
+	
+	<select id="read" resultType="org.admin.domain.ScheduleVO">
+		<![CDATA[
+		select * from schedule where snum = #{snum}
+		]]> 
+	</select>
+	
+	<update id="update">
+		update schedule set 
+		grade = #{grade},
+		departure = #{departure},
+		arrival = #{arrival}, 
+		workday = #{workday},
+		st = #{st}, 
+		eta = #{eta}, 
+		price = #{price} 
+		where snum = #{snum}
+	
+	</update>
+	
+	<delete id="delete">
+		delete from schedule where snum = #{snum}
+	</delete>
+
+	<!-- 등록된 총 노선 개수 -->
+	<select id="getTotal" resultType="int">
+		select count(*) from schedule where 
+		
+		 <if test="!''.equals(departure) and departure != null"> 
+         		 	departure = #{departure} and 
+         		 </if>
+         		  <if test="!''.equals(arrival) and arrival != null"> 
+         		 	arrival = #{arrival} and 
+         		 </if>
+         		  <if test="!''.equals(grade) and grade != null"> 
+         		 	grade = #{grade} and 
+         		 </if>
+         		  <if test="!''.equals(st) and st != null"> 
+         		 	st > #{st} and 
+         		 </if>
+         	snum > 0
+		
+	</select>
+	
+	<!-- 페이징 적용 된 전체 목록 -->
+	<select id="getListPaging" resultType="org.admin.domain.ScheduleVO">
+	<![CDATA[   
+		select snum, departure, arrival, workday, st, eta, grade, price from 
+			( 
+				select /*+  INDEX_DESC(schedule) */ 
+         		  rownum rn, snum, departure, arrival, workday, st, eta, price, grade
+         		  from schedule where
+         		  
+         		 ]]>
+         		 
+         		 <if test="!''.equals(departure) and departure != null"> 
+         		 <!-- or은 사용할 수 없음 null인지 빈공간인지 mybatis에서 인식을 못함.. -->
+         		 	departure = #{departure} and 
+         		 </if>
+         		  <if test="!''.equals(arrival) and arrival != null"> 
+         		 	arrival = #{arrival} and 
+         		 </if>
+         		  <if test="!''.equals(grade) and grade != null"> 
+         		 	grade = #{grade} and 
+         		 </if>
+         		  <if test="!''.equals(st) and st != null"> 
+         		 	st > #{st} and 
+         		 </if>
+         	
+         		 
+         		 
+         <![CDATA[		  
+         		   rownum <= #{pageNum} * #{amount} 
+         		  )
+         		  where rn > (#{ pageNum} -1) * #{amount}
+	]]>
+
+			
+	</select>
+	
+	
+	
+
+</mapper>
